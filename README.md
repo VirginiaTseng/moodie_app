@@ -1,3 +1,16 @@
+Step 1: Install Flutter 
+        https://flutter.dev/
+
+        for MacOS, XCode and cocoapods are needed to be installed.
+        
+Step 2: Install VS Code, and install flutter extension.
+
+Step 3: Debug and Run
+     flutter run
+
+
+
+
 # moodie_app
 
 A new Flutter project.
