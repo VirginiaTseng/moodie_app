@@ -8,7 +8,7 @@ class CommunityScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('社区'),
+        title: const Text('Community'),
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications),
@@ -28,7 +28,7 @@ class CommunityScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 心愿瓶
+            // Wish Bottle
             Container(
               height: 200,
               width: double.infinity,
@@ -44,7 +44,7 @@ class CommunityScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    '心愿瓶',
+                    'Wish Bottle',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 22,
@@ -52,7 +52,7 @@ class CommunityScreen extends StatelessWidget {
                     ),
                   ),
                   const Text(
-                    '分享你的心愿或阅读他人的',
+                    'Share your wishes or read others\'',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 14,
@@ -72,7 +72,7 @@ class CommunityScreen extends StatelessWidget {
             
             const SizedBox(height: 20),
             
-            // 发现你的兴趣
+            // Discover Your Interests
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Container(
@@ -86,16 +86,16 @@ class CommunityScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
                     Text(
-                      '发现你的兴趣',
+                      'Discover Your Interests',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 4),
+                    SizedBox(height: 8),
                     Text(
-                      '加入本地活动，结识志同道合的人',
+                      'Join local activities, meet like-minded people',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,
@@ -108,30 +108,39 @@ class CommunityScreen extends StatelessWidget {
             
             const SizedBox(height: 20),
             
-            // 你的兴趣
+            // Your Interests
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    '你的兴趣',
+                    'Your Interests',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
+                  const SizedBox(height: 12),
+                  Row(
                     children: [
-                      _buildInterestChip('瑜伽', true),
-                      _buildInterestChip('艺术', true),
-                      _buildInterestChip('阅读', true),
-                      _buildInterestChip('烹饪', false),
-                      _buildInterestChip('摄影', true),
-                      _buildInterestChip('音乐', false),
+                      _buildInterestChip(
+                        label: 'Outdoor Activities',
+                        icon: Icons.nature_people,
+                        color: Colors.green,
+                      ),
+                      const SizedBox(width: 8),
+                      _buildInterestChip(
+                        label: 'Safety Workshops',
+                        icon: Icons.security,
+                        color: Colors.blue,
+                      ),
+                      const SizedBox(width: 8),
+                      _buildInterestChip(
+                        label: 'Community Patrol',
+                        icon: Icons.visibility,
+                        color: Colors.purple,
+                      ),
                     ],
                   ),
                 ],
@@ -140,405 +149,242 @@ class CommunityScreen extends StatelessWidget {
             
             const SizedBox(height: 20),
             
-            // 即将举行的活动
+            // Upcoming Events
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    '即将举行的活动',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text('查看全部'),
-                  ),
-                ],
-              ),
-            ),
-            
-            // 活动列表
-            _buildEventCard(
-              image: 'assets/images/yoga.jpg',
-              title: '公园瑜伽',
-              date: '2025-02-20 at 09:00 AM',
-              location: '中央公园',
-              participants: 15,
-              category: '健康',
-            ),
-            _buildEventCard(
-              image: 'assets/images/art.jpg',
-              title: '艺术与手工工作坊',
-              date: '2025-02-22 at 02:00 PM',
-              location: '社区中心',
-              participants: 8,
-              category: '创意',
-            ),
-            _buildEventCard(
-              image: 'assets/images/book.jpg',
-              title: '读书俱乐部会议',
-              date: '2025-02-24 at 06:30 PM',
-              location: '当地图书馆',
-              participants: 12,
-              category: '教育',
-            ),
-            
-            const SizedBox(height: 20),
-            
-            // 每日健康小贴士
-            Padding(
-              padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    '每日健康小贴士',
+                    'Upcoming Events',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.purple.shade100,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.purple.shade300,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: const Icon(
-                            Icons.psychology,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                '练习正念',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              SizedBox(height: 4),
-                              Text(
-                                '今天花5分钟专注于呼吸，活在当下。',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                  const SizedBox(height: 12),
+                  _buildEventCard(
+                    title: 'Self-defense Workshop',
+                    date: 'May 15, 2023 • 2:00 PM',
+                    location: 'Community Center',
+                    participants: 24,
+                    image: 'assets/images/self_defense.jpg',
+                  ),
+                  const SizedBox(height: 12),
+                  _buildEventCard(
+                    title: 'Neighborhood Watch Meeting',
+                    date: 'May 18, 2023 • 6:30 PM',
+                    location: 'Local Library',
+                    participants: 18,
+                    image: 'assets/images/neighborhood_watch.jpg',
+                  ),
+                  const SizedBox(height: 12),
+                  _buildEventCard(
+                    title: 'Safety App Training',
+                    date: 'May 22, 2023 • 4:00 PM',
+                    location: 'Online Zoom Meeting',
+                    participants: 32,
+                    image: 'assets/images/app_training.jpg',
                   ),
                 ],
               ),
             ),
             
-            const SizedBox(height: 60), // 为底部导航栏留出空间
+            const SizedBox(height: 20),
           ],
         ),
       ),
-      bottomNavigationBar: buildBottomNavigationBar(3), // 3表示社区标签被选中
-      floatingActionButton: buildEmergencyButton(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
   Widget _buildWishBottle(int index) {
-    return Stack(
-      children: [
-        Container(
-          width: 80,
-          height: 100,
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.3),
-            borderRadius: BorderRadius.circular(8),
-          ),
-        ),
-        if (index == 2)
-          Positioned(
-            right: 0,
-            top: 0,
-            child: Container(
-              width: 24,
-              height: 24,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(
-                Icons.add,
-                size: 16,
-                color: AppTheme.primaryColor,
-              ),
+    final List<Color> colors = [
+      Colors.blue.shade300,
+      Colors.purple.shade300,
+      Colors.green.shade300,
+    ];
+    
+    final List<String> messages = [
+      'I hope everyone stays safe tonight',
+      'Wishing for a safer community',
+      'Let\'s look out for each other',
+    ];
+    
+    return Container(
+      width: 100,
+      height: 100,
+      decoration: BoxDecoration(
+        color: colors[index],
+        borderRadius: BorderRadius.circular(12),
+      ),
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.lightbulb, color: Colors.white),
+          const SizedBox(height: 8),
+          Text(
+            messages[index],
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
             ),
+            textAlign: TextAlign.center,
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
           ),
-      ],
+        ],
+      ),
     );
   }
 
-  Widget _buildInterestChip(String label, bool isSelected) {
+  Widget _buildInterestChip({
+    required String label,
+    required IconData icon,
+    required Color color,
+  }) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-        color: isSelected ? AppTheme.primaryColor : Colors.grey.shade200,
+        color: color.withOpacity(0.1),
         borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: color.withOpacity(0.3)),
       ),
-      child: Text(
-        label,
-        style: TextStyle(
-          color: isSelected ? Colors.white : Colors.grey.shade700,
-          fontWeight: FontWeight.bold,
-        ),
+      child: Row(
+        children: [
+          Icon(icon, size: 16, color: color),
+          const SizedBox(width: 6),
+          Text(
+            label,
+            style: TextStyle(
+              color: color,
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
+            ),
+          ),
+        ],
       ),
     );
   }
 
   Widget _buildEventCard({
-    required String image,
     required String title,
     required String date,
     required String location,
     required int participants,
-    required String category,
+    required String image,
   }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Card(
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Column(
-          children: [
-            Row(
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: 120,
+            decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(12),
+                topRight: Radius.circular(12),
+              ),
+              image: DecorationImage(
+                image: AssetImage(image),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                    bottomLeft: Radius.circular(16),
-                  ),
-                  child: Container(
-                    width: 100,
-                    height: 100,
-                    color: Colors.grey.shade300,
-                    child: Center(
-                      child: Icon(
-                        title.contains('瑜伽') ? Icons.self_improvement :
-                        title.contains('艺术') ? Icons.palette :
-                        Icons.book,
-                        size: 40,
-                        color: Colors.grey.shade700,
-                      ),
-                    ),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
                   ),
                 ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    Icon(Icons.calendar_today, size: 14, color: Colors.grey.shade600),
+                    const SizedBox(width: 4),
+                    Text(
+                      date,
+                      style: TextStyle(
+                        color: Colors.grey.shade600,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    Icon(Icons.location_on, size: 14, color: Colors.grey.shade600),
+                    const SizedBox(width: 4),
+                    Text(
+                      location,
+                      style: TextStyle(
+                        color: Colors.grey.shade600,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                title,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                                vertical: 4,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.blue.shade100,
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Text(
-                                category,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.blue.shade800,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 8),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.calendar_today,
-                              size: 14,
-                              color: Colors.grey,
-                            ),
-                            const SizedBox(width: 4),
-                            Text(
-                              date,
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey.shade600,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 4),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.location_on,
-                              size: 14,
-                              color: Colors.grey,
-                            ),
-                            const SizedBox(width: 4),
-                            Text(
-                              location,
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey.shade600,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 8),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                const Icon(
-                                  Icons.people,
-                                  size: 14,
-                                  color: Colors.grey,
-                                ),
-                                const SizedBox(width: 4),
-                                Text(
-                                  '$participants 人已加入',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.grey.shade600,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            ElevatedButton(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppTheme.primaryColor,
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                  vertical: 8,
-                                ),
-                                minimumSize: Size.zero,
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                              ),
-                              child: const Text(
-                                '加入',
-                                style: TextStyle(fontSize: 12),
-                              ),
-                            ),
-                          ],
+                        Icon(Icons.people, size: 14, color: Colors.grey.shade600),
+                        const SizedBox(width: 4),
+                        Text(
+                          '$participants people plan to join',
+                          style: TextStyle(
+                            color: Colors.grey.shade600,
+                            fontSize: 12,
+                          ),
                         ),
                       ],
                     ),
-                  ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppTheme.primaryColor,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 8,
+                        ),
+                        minimumSize: Size.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                      child: const Text(
+                        'Join',
+                        style: TextStyle(fontSize: 12),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-    );
-  }
-
-  Widget buildBottomNavigationBar(int selectedIndex) {
-    return BottomAppBar(
-      shape: const CircularNotchedRectangle(),
-      notchMargin: 8.0,
-      child: SizedBox(
-        height: 60,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Expanded(
-              child: IconButton(
-                icon: Icon(
-                  Icons.home,
-                  color: selectedIndex == 0 ? AppTheme.primaryColor : Colors.grey,
-                ),
-                onPressed: () {},
-                tooltip: 'Home',
-              ),
-            ),
-            Expanded(
-              child: IconButton(
-                icon: Icon(
-                  Icons.map,
-                  color: selectedIndex == 1 ? AppTheme.primaryColor : Colors.grey,
-                ),
-                onPressed: () {},
-                tooltip: 'Map',
-              ),
-            ),
-            const Expanded(child: SizedBox()), // 为紧急按钮留出空间
-            Expanded(
-              child: IconButton(
-                icon: Icon(
-                  Icons.favorite,
-                  color: selectedIndex == 3 ? AppTheme.primaryColor : Colors.grey,
-                ),
-                onPressed: () {},
-                tooltip: 'Community',
-              ),
-            ),
-            Expanded(
-              child: IconButton(
-                icon: Icon(
-                  Icons.person,
-                  color: selectedIndex == 4 ? AppTheme.primaryColor : Colors.grey,
-                ),
-                onPressed: () {},
-                tooltip: 'Profile',
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildEmergencyButton() {
-    return FloatingActionButton(
-      backgroundColor: AppTheme.accentColor,
-      child: const Icon(Icons.warning_amber_rounded, size: 30),
-      onPressed: () {
-        // 显示紧急选项
-      },
     );
   }
 }

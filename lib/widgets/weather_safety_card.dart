@@ -13,7 +13,7 @@ class WeatherSafetyCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text(
-              '天气与安全',
+              'Weather & Safety',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -22,13 +22,13 @@ class WeatherSafetyCard extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  '更新于 5 分钟前',
+                  'Updated 5 minutes ago',
                   style: TextStyle(
                     fontSize: 12,
                     color: Colors.grey.shade600,
                   ),
                 ),
-                const SizedBox(width: 5),
+                const SizedBox(width: 4),
                 Icon(
                   Icons.refresh,
                   size: 16,
@@ -38,120 +38,91 @@ class WeatherSafetyCard extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 16),
         Row(
           children: [
             Expanded(
               child: Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.blue.shade500,
+                  color: Colors.orange.shade50,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      children: const [
-                        Icon(Icons.wb_cloudy, color: Colors.white),
-                        SizedBox(width: 8),
-                        Text(
-                          '天气预警',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: const [
-                        Icon(Icons.ac_unit, color: Colors.white, size: 20),
-                        SizedBox(width: 5),
-                        Text(
-                          '小雪',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                        Spacer(),
-                        Text(
-                          '-2° C',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
                       children: [
-                        _buildWeatherWarning(
-                          icon: Icons.warning,
-                          label: '道路结冰',
+                        Icon(
+                          Icons.warning_amber_rounded,
+                          color: Colors.orange.shade700,
                         ),
-                        const SizedBox(width: 10),
-                        _buildWeatherWarning(
-                          icon: Icons.visibility_off,
-                          label: '能见度低',
+                        const SizedBox(width: 8),
+                        Text(
+                          'Weather Alert',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.orange.shade700,
+                          ),
                         ),
                       ],
+                    ),
+                    const SizedBox(height: 12),
+                    _buildAlertItem(
+                      icon: Icons.ac_unit,
+                      text: 'Light Snow',
+                    ),
+                    _buildAlertItem(
+                      icon: Icons.snowing,
+                      text: 'Road Icing',
+                    ),
+                    _buildAlertItem(
+                      icon: Icons.visibility_off,
+                      text: 'Low Visibility',
                     ),
                   ],
                 ),
               ),
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: 12),
             Expanded(
               child: Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.green.shade500,
+                  color: Colors.blue.shade50,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      children: const [
-                        Icon(Icons.shield, color: Colors.white),
-                        SizedBox(width: 8),
+                      children: [
+                        Icon(
+                          Icons.shield,
+                          color: Colors.blue.shade700,
+                        ),
+                        const SizedBox(width: 8),
                         Text(
-                          '安全等级',
+                          'Safety Alert',
                           style: TextStyle(
-                            color: Colors.white,
                             fontWeight: FontWeight.bold,
+                            color: Colors.blue.shade700,
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10),
-                    const Text(
-                      '安全',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
+                    const SizedBox(height: 12),
+                    _buildAlertItem(
+                      icon: Icons.location_on,
+                      text: 'Safe Area',
                     ),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        _buildSafetyInfo(
-                          icon: Icons.security,
-                          label: '受保护',
-                        ),
-                        const SizedBox(width: 10),
-                        _buildSafetyInfo(
-                          icon: Icons.home,
-                          label: '家庭区域',
-                        ),
-                      ],
+                    _buildAlertItem(
+                      icon: Icons.security,
+                      text: 'Protected',
+                    ),
+                    _buildAlertItem(
+                      icon: Icons.home,
+                      text: 'Home Area',
                     ),
                   ],
                 ),
@@ -159,24 +130,24 @@ class WeatherSafetyCard extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 16),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             _buildEnvironmentInfo(
               icon: Icons.wb_sunny,
-              label: '紫外线指数',
-              value: '低',
+              label: 'UV Index',
+              value: 'Low',
             ),
             _buildEnvironmentInfo(
               icon: Icons.air,
-              label: '空气质量',
-              value: '良好',
+              label: 'Air Quality',
+              value: 'Good',
             ),
             _buildEnvironmentInfo(
               icon: Icons.visibility,
-              label: '能见度',
-              value: '清晰',
+              label: 'Visibility',
+              value: 'Clear',
             ),
           ],
         ),
@@ -184,47 +155,24 @@ class WeatherSafetyCard extends StatelessWidget {
     );
   }
 
-  Widget _buildWeatherWarning({required IconData icon, required String label}) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: Colors.yellow.shade700,
-        borderRadius: BorderRadius.circular(4),
-      ),
+  Widget _buildAlertItem({
+    required IconData icon,
+    required String text,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
       child: Row(
         children: [
-          Icon(icon, color: Colors.white, size: 12),
-          const SizedBox(width: 4),
-          Text(
-            label,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 10,
-              fontWeight: FontWeight.bold,
-            ),
+          Icon(
+            icon,
+            size: 16,
+            color: Colors.grey.shade700,
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSafetyInfo({required IconData icon, required String label}) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: Colors.green.shade300,
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: Row(
-        children: [
-          Icon(icon, color: Colors.white, size: 12),
-          const SizedBox(width: 4),
+          const SizedBox(width: 8),
           Text(
-            label,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 10,
-              fontWeight: FontWeight.bold,
+            text,
+            style: TextStyle(
+              color: Colors.grey.shade700,
             ),
           ),
         ],

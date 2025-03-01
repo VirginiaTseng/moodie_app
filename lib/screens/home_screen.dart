@@ -7,6 +7,7 @@ import '../widgets/drawer_menu.dart';
 import '../widgets/map_screen.dart';
 import '../widgets/community_screen.dart';
 import '../widgets/profile_screen.dart';
+import '../widgets/safe_zones_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -21,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _screens = [
     const HomeContent(),
     const MapScreen(),
-    const SizedBox(), // 占位，为紧急按钮留空
+    const SizedBox(), // Placeholder for emergency button
     const CommunityScreen(),
     const ProfileScreen(),
   ];
@@ -67,8 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: IconButton(
                 icon: Icon(
                   Icons.home,
-                  color:
-                      selectedIndex == 0 ? AppTheme.primaryColor : Colors.grey,
+                  color: selectedIndex == 0 ? AppTheme.primaryColor : Colors.grey,
                 ),
                 onPressed: () {
                   setState(() {
@@ -82,8 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: IconButton(
                 icon: Icon(
                   Icons.map,
-                  color:
-                      selectedIndex == 1 ? AppTheme.primaryColor : Colors.grey,
+                  color: selectedIndex == 1 ? AppTheme.primaryColor : Colors.grey,
                 ),
                 onPressed: () {
                   setState(() {
@@ -93,13 +92,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 tooltip: 'Map',
               ),
             ),
-            const Expanded(child: SizedBox()), // 为紧急按钮留出空间
+            const Expanded(child: SizedBox()), // Space for emergency button
             Expanded(
               child: IconButton(
                 icon: Icon(
                   Icons.people,
-                  color:
-                      selectedIndex == 3 ? AppTheme.primaryColor : Colors.grey,
+                  color: selectedIndex == 3 ? AppTheme.primaryColor : Colors.grey,
                 ),
                 onPressed: () {
                   setState(() {
@@ -113,8 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: IconButton(
                 icon: Icon(
                   Icons.person,
-                  color:
-                      selectedIndex == 4 ? AppTheme.primaryColor : Colors.grey,
+                  color: selectedIndex == 4 ? AppTheme.primaryColor : Colors.grey,
                 ),
                 onPressed: () {
                   setState(() {
@@ -130,111 +127,13 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildActionButton(
-    BuildContext context, {
-    required IconData icon,
-    required String label,
-    required String subLabel,
-    required Color color,
-    required Color iconColor,
-  }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        children: [
-          Icon(icon, color: iconColor, size: 28),
-          const SizedBox(width: 12),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                label,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-              ),
-              Text(
-                subLabel,
-                style: TextStyle(
-                  color: Colors.grey.shade700,
-                  fontSize: 12,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget buildEmergencyButton() {
     return FloatingActionButton(
       backgroundColor: AppTheme.accentColor,
       child: const Icon(Icons.warning_amber_rounded, size: 30),
       onPressed: () {
-        // 显示紧急选项
+        // Show emergency options
       },
-    );
-  }
-}
-
-class ContactsCard extends StatelessWidget {
-  final int count;
-
-  const ContactsCard({Key? key, required this.count}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Icon(Icons.people, color: Colors.white, size: 30),
-        const SizedBox(height: 8),
-        Text(
-          '联系人',
-          style: TextStyle(color: Colors.white.withOpacity(0.9)),
-        ),
-        Text(
-          '$count 活跃',
-          style: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class SafeZonesCard extends StatelessWidget {
-  final int count;
-
-  const SafeZonesCard({Key? key, required this.count}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Icon(Icons.location_on, color: Colors.white, size: 30),
-        const SizedBox(height: 8),
-        Text(
-          '安全区域',
-          style: TextStyle(color: Colors.white.withOpacity(0.9)),
-        ),
-        Text(
-          '$count 区域',
-          style: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
-        ),
-      ],
     );
   }
 }
@@ -259,8 +158,8 @@ class HomeContent extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: const [
-                  SafetyScoreCard(score: 85),
-                  SafeZonesCard(count: 3),
+                  SafetyScoreCard(score: 85, label: "Safety Score"),
+                  SafeZonesCard(count: 3, label: "Safe Zones", zonesLabel: "Zones"),
                 ],
               ),
             ),
@@ -273,16 +172,16 @@ class HomeContent extends StatelessWidget {
                 _buildActionButton(
                   context,
                   icon: Icons.shield,
-                  label: '安全检查',
-                  subLabel: '检查您的安全设置',
+                  label: 'Safety Check',
+                  subLabel: 'Check your safety settings',
                   color: Colors.blue.shade50,
                   iconColor: Colors.blue,
                 ),
                 _buildActionButton(
                   context,
                   icon: Icons.location_on,
-                  label: '安全区域',
-                  subLabel: '管理您的安全区域',
+                  label: 'Safety Zones',
+                  subLabel: 'Manage your safety zones',
                   color: Colors.purple.shade50,
                   iconColor: Colors.purple,
                 ),
@@ -290,7 +189,7 @@ class HomeContent extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             const Text(
-              '最近活动',
+              'Recent Activities',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -299,14 +198,14 @@ class HomeContent extends StatelessWidget {
             const SizedBox(height: 10),
             const ActivityCard(
               icon: Icons.check_circle,
-              title: '安全检查已完成',
-              time: '今天, 10:30 AM',
+              title: 'Safety check completed',
+              time: 'Today, 10:30 AM',
               iconColor: Colors.green,
             ),
             const ActivityCard(
               icon: Icons.add_location,
-              title: '新安全区域已添加',
-              time: '昨天, 3:45 PM',
+              title: 'New safe zone added',
+              time: 'Yesterday, 3:45 PM',
               iconColor: Colors.blue,
             ),
           ],

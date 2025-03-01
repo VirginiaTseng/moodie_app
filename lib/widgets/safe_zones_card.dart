@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
 
-class SafetyScoreCard extends StatelessWidget {
-  final int score;
+class SafeZonesCard extends StatelessWidget {
+  final int count;
   final String label;
+  final String zonesLabel;
   
-  const SafetyScoreCard({
+  const SafeZonesCard({
     Key? key, 
-    required this.score,
+    required this.count,
     required this.label,
+    required this.zonesLabel,
   }) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Icon(Icons.shield, color: Colors.white, size: 30),
+        const Icon(Icons.location_on, color: Colors.white, size: 30),
         const SizedBox(height: 8),
         Text(
           label,
           style: TextStyle(color: Colors.white.withOpacity(0.9)),
         ),
         Text(
-          '$score %',
+          '$count $zonesLabel',
           style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -31,4 +33,4 @@ class SafetyScoreCard extends StatelessWidget {
       ],
     );
   }
-}
+} 

@@ -23,7 +23,7 @@ class DrawerMenu extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 const Text(
-                  '用户名',
+                  'Username',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
@@ -42,60 +42,60 @@ class DrawerMenu extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.settings),
-            title: const Text('设置'),
+            title: const Text('Settings'),
             onTap: () {
               Navigator.pop(context);
-              // 导航到设置页面
+              // Navigate to settings page
             },
           ),
           ListTile(
-            leading: const Icon(Icons.shield),
-            title: const Text('安全设置'),
+            leading: const Icon(Icons.security),
+            title: const Text('Security Settings'),
             onTap: () {
               Navigator.pop(context);
-              // 导航到安全设置页面
+              // Navigate to security settings page
             },
           ),
           ListTile(
-            leading: const Icon(Icons.people),
-            title: const Text('紧急联系人'),
+            leading: const Icon(Icons.contacts),
+            title: const Text('Emergency Contacts'),
             onTap: () {
               Navigator.pop(context);
-              // 导航到紧急联系人页面
+              // Navigate to emergency contacts page
             },
           ),
           ListTile(
             leading: const Icon(Icons.map),
-            title: const Text('安全区域'),
+            title: const Text('Safety Zones'),
             onTap: () {
               Navigator.pop(context);
-              // 导航到安全区域页面
+              // Navigate to safety zones page
             },
           ),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.help),
-            title: const Text('帮助与支持'),
+            title: const Text('Help & Support'),
             onTap: () {
               Navigator.pop(context);
-              // 导航到帮助页面
+              // Navigate to help page
             },
           ),
           ListTile(
             leading: const Icon(Icons.info),
-            title: const Text('关于'),
+            title: const Text('About'),
             onTap: () {
               Navigator.pop(context);
-              // 导航到关于页面
+              // Navigate to about page
             },
           ),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.logout, color: Colors.red),
-            title: const Text('退出登录', style: TextStyle(color: Colors.red)),
+            title: const Text('Logout', style: TextStyle(color: Colors.red)),
             onTap: () {
               Navigator.pop(context);
-              // 处理退出登录
+              // Handle logout
             },
           ),
         ],

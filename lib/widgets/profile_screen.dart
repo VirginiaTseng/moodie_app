@@ -8,7 +8,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('个人资料'),
+        title: const Text('Profile'),
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications),
@@ -27,7 +27,7 @@ class ProfileScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // 个人资料头部
+            // Profile header
             Container(
               padding: const EdgeInsets.symmetric(vertical: 24),
               color: AppTheme.primaryColor,
@@ -45,50 +45,47 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     const Text(
-                      '用户名',
+                      'Username',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 22,
+                        fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '用户ID: 12345678',
+                      'User ID: 12345678',
                       style: TextStyle(
                         color: Colors.white.withOpacity(0.8),
                         fontSize: 14,
                       ),
                     ),
                     const SizedBox(height: 16),
-                    ElevatedButton.icon(
+                    ElevatedButton(
                       onPressed: () {},
-                      icon: const Icon(Icons.edit, color: AppTheme.primaryColor),
-                      label: const Text(
-                        '编辑资料',
-                        style: TextStyle(color: AppTheme.primaryColor),
-                      ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
+                        foregroundColor: AppTheme.primaryColor,
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 10,
+                          horizontal: 24,
+                          vertical: 12,
                         ),
                       ),
+                      child: const Text('Edit Profile'),
                     ),
                   ],
                 ),
               ),
             ),
             
-            // 安全统计
+            // Safety statistics
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    '安全统计',
+                    'Safety Statistics',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -96,32 +93,31 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Expanded(
-                        child: _buildStatCard(
-                          icon: Icons.shield,
-                          title: '安全分数',
-                          value: '85%',
-                          color: Colors.green,
-                        ),
+                      _buildStatItem(
+                        value: '85%',
+                        label: 'Safety Score',
+                        icon: Icons.shield,
+                        color: Colors.blue,
                       ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: _buildStatCard(
-                          icon: Icons.check_circle,
-                          title: '安全检查',
-                          value: '12',
-                          color: Colors.blue,
-                        ),
+                      _buildStatItem(
+                        value: '12',
+                        label: 'Safety Checks',
+                        icon: Icons.check_circle,
+                        color: Colors.green,
                       ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: _buildStatCard(
-                          icon: Icons.location_on,
-                          title: '安全区域',
-                          value: '3',
-                          color: Colors.purple,
-                        ),
+                      _buildStatItem(
+                        value: '30',
+                        label: 'Days Protected',
+                        icon: Icons.calendar_today,
+                        color: Colors.purple,
+                      ),
+                      _buildStatItem(
+                        value: '2',
+                        label: 'Alerts Sent',
+                        icon: Icons.warning,
+                        color: Colors.orange,
                       ),
                     ],
                   ),
@@ -129,221 +125,172 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             
-            // 设置选项
+            const Divider(),
+            
+            // Account settings
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    '设置',
+                    'Account Settings',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 16),
-                  _buildSettingItem(
-                    icon: Icons.person,
-                    title: '账户信息',
-                    subtitle: '管理您的个人信息',
-                    iconColor: Colors.blue,
-                  ),
-                  _buildSettingItem(
-                    icon: Icons.shield,
-                    title: '安全设置',
-                    subtitle: '管理您的安全偏好',
-                    iconColor: Colors.green,
-                  ),
-                  _buildSettingItem(
+                  _buildSettingsItem(
                     icon: Icons.notifications,
-                    title: '通知设置',
-                    subtitle: '管理应用通知',
-                    iconColor: Colors.orange,
+                    title: 'Notification Settings',
+                    subtitle: 'Manage your notifications',
+                    color: Colors.blue,
                   ),
-                  _buildSettingItem(
-                    icon: Icons.privacy_tip,
-                    title: '隐私设置',
-                    subtitle: '管理您的隐私偏好',
-                    iconColor: Colors.purple,
+                  _buildSettingsItem(
+                    icon: Icons.lock,
+                    title: 'Privacy Settings',
+                    subtitle: 'Control who can see your information',
+                    color: Colors.purple,
                   ),
-                  _buildSettingItem(
-                    icon: Icons.help,
-                    title: '帮助与支持',
-                    subtitle: '获取帮助和常见问题解答',
-                    iconColor: Colors.teal,
-                  ),
-                  _buildSettingItem(
-                    icon: Icons.info,
-                    title: '关于',
-                    subtitle: '应用信息和版本',
-                    iconColor: Colors.grey,
+                  _buildSettingsItem(
+                    icon: Icons.warning,
+                    title: 'Emergency Settings',
+                    subtitle: 'Configure emergency response',
+                    color: Colors.red,
                   ),
                 ],
               ),
             ),
             
-            // 退出登录按钮
+            const Divider(),
+            
+            // Support and about
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: SizedBox(
-                width: double.infinity,
-                child: ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.logout, color: Colors.white),
-                  label: const Text(
-                    '退出登录',
-                    style: TextStyle(color: Colors.white),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildSettingsItem(
+                    icon: Icons.help,
+                    title: 'Help & Support',
+                    subtitle: 'Get help with the app',
+                    color: Colors.green,
                   ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
-                    padding: const EdgeInsets.symmetric(vertical: 12),
+                  _buildSettingsItem(
+                    icon: Icons.info,
+                    title: 'About',
+                    subtitle: 'App version and information',
+                    color: Colors.grey,
                   ),
-                ),
+                ],
               ),
             ),
             
-            const SizedBox(height: 60), // 为底部导航栏留出空间
+            const SizedBox(height: 16),
+            
+            // Logout button
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red.shade50,
+                  foregroundColor: Colors.red,
+                  minimumSize: const Size(double.infinity, 50),
+                ),
+                child: const Text('Logout'),
+              ),
+            ),
+            
+            const SizedBox(height: 32),
           ],
         ),
       ),
-      bottomNavigationBar: buildBottomNavigationBar(4), // 4表示个人资料标签被选中
-      floatingActionButton: buildEmergencyButton(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
-  Widget _buildStatCard({
-    required IconData icon,
-    required String title,
+  Widget _buildStatItem({
     required String value,
+    required String label,
+    required IconData icon,
     required Color color,
   }) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        children: [
-          Icon(icon, color: color, size: 30),
-          const SizedBox(height: 8),
-          Text(
-            title,
-            style: TextStyle(
-              color: Colors.grey.shade700,
-              fontSize: 12,
-            ),
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: color.withOpacity(0.1),
+            shape: BoxShape.circle,
           ),
-          const SizedBox(height: 4),
-          Text(
-            value,
-            style: TextStyle(
-              color: color,
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-            ),
+          child: Icon(icon, color: color),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          value,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
           ),
-        ],
-      ),
+        ),
+        Text(
+          label,
+          style: TextStyle(
+            color: Colors.grey.shade600,
+            fontSize: 12,
+          ),
+        ),
+      ],
     );
   }
 
-  Widget _buildSettingItem({
+  Widget _buildSettingsItem({
     required IconData icon,
     required String title,
     required String subtitle,
-    required Color iconColor,
+    required Color color,
   }) {
-    return Card(
-      elevation: 0,
-      margin: const EdgeInsets.only(bottom: 8),
-      child: ListTile(
-        leading: Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: iconColor.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(8),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16.0),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Icon(icon, color: color),
           ),
-          child: Icon(icon, color: iconColor),
-        ),
-        title: Text(
-          title,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    color: Colors.grey.shade600,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        subtitle: Text(subtitle),
-        trailing: const Icon(Icons.chevron_right),
-        onTap: () {},
+          Icon(
+            Icons.chevron_right,
+            color: Colors.grey.shade400,
+          ),
+        ],
       ),
-    );
-  }
-
-  Widget buildBottomNavigationBar(int selectedIndex) {
-    return BottomAppBar(
-      shape: const CircularNotchedRectangle(),
-      notchMargin: 8.0,
-      child: SizedBox(
-        height: 60,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Expanded(
-              child: IconButton(
-                icon: Icon(
-                  Icons.home,
-                  color: selectedIndex == 0 ? AppTheme.primaryColor : Colors.grey,
-                ),
-                onPressed: () {},
-                tooltip: 'Home',
-              ),
-            ),
-            Expanded(
-              child: IconButton(
-                icon: Icon(
-                  Icons.map,
-                  color: selectedIndex == 1 ? AppTheme.primaryColor : Colors.grey,
-                ),
-                onPressed: () {},
-                tooltip: 'Map',
-              ),
-            ),
-            const Expanded(child: SizedBox()), // 为紧急按钮留出空间
-            Expanded(
-              child: IconButton(
-                icon: Icon(
-                  Icons.favorite,
-                  color: selectedIndex == 3 ? AppTheme.primaryColor : Colors.grey,
-                ),
-                onPressed: () {},
-                tooltip: 'Community',
-              ),
-            ),
-            Expanded(
-              child: IconButton(
-                icon: Icon(
-                  Icons.person,
-                  color: selectedIndex == 4 ? AppTheme.primaryColor : Colors.grey,
-                ),
-                onPressed: () {},
-                tooltip: 'Profile',
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildEmergencyButton() {
-    return FloatingActionButton(
-      backgroundColor: AppTheme.accentColor,
-      child: const Icon(Icons.warning_amber_rounded, size: 30),
-      onPressed: () {
-        // 显示紧急选项
-      },
     );
   }
 }
