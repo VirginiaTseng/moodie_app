@@ -6,193 +6,174 @@ class CommunityScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Community'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.dark_mode),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.mic),
-            onPressed: () {},
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Wish Bottle
-            Container(
-              height: 200,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: AppTheme.primaryColor.withOpacity(0.8),
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                ),
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Wish Bottle
+          Container(
+            height: 200,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: AppTheme.primaryColor.withOpacity(0.8),
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
               ),
-              padding: const EdgeInsets.all(20),
+            ),
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Wish Bottle',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Text(
+                  'Share your wishes or read others\'',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                  ),
+                ),
+                const Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: List.generate(
+                    3,
+                    (index) => _buildWishBottle(index),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          
+          const SizedBox(height: 20),
+          
+          // Discover Your Interests
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: AppTheme.primaryColor,
+                borderRadius: BorderRadius.circular(16),
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Wish Bottle',
+                children: const [
+                  Text(
+                    'Discover Your Interests',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 22,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Text(
-                    'Share your wishes or read others\'',
+                  SizedBox(height: 8),
+                  Text(
+                    'Join local activities, meet like-minded people',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 14,
                     ),
                   ),
-                  const Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: List.generate(
-                      3,
-                      (index) => _buildWishBottle(index),
-                    ),
-                  ),
                 ],
               ),
             ),
-            
-            const SizedBox(height: 20),
-            
-            // Discover Your Interests
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: AppTheme.primaryColor,
-                  borderRadius: BorderRadius.circular(16),
+          ),
+          
+          const SizedBox(height: 20),
+          
+          // Your Interests
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Your Interests',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
-                      'Discover Your Interests',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    _buildInterestChip(
+                      label: 'Outdoor Activities',
+                      icon: Icons.nature_people,
+                      color: Colors.green,
                     ),
-                    SizedBox(height: 8),
-                    Text(
-                      'Join local activities, meet like-minded people',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
+                    const SizedBox(width: 8),
+                    _buildInterestChip(
+                      label: 'Safety Workshops',
+                      icon: Icons.security,
+                      color: Colors.blue,
+                    ),
+                    const SizedBox(width: 8),
+                    _buildInterestChip(
+                      label: 'Community Patrol',
+                      icon: Icons.visibility,
+                      color: Colors.purple,
                     ),
                   ],
                 ),
-              ),
+              ],
             ),
-            
-            const SizedBox(height: 20),
-            
-            // Your Interests
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Your Interests',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+          ),
+          
+          const SizedBox(height: 20),
+          
+          // Upcoming Events
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Upcoming Events',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
                   ),
-                  const SizedBox(height: 12),
-                  Row(
-                    children: [
-                      _buildInterestChip(
-                        label: 'Outdoor Activities',
-                        icon: Icons.nature_people,
-                        color: Colors.green,
-                      ),
-                      const SizedBox(width: 8),
-                      _buildInterestChip(
-                        label: 'Safety Workshops',
-                        icon: Icons.security,
-                        color: Colors.blue,
-                      ),
-                      const SizedBox(width: 8),
-                      _buildInterestChip(
-                        label: 'Community Patrol',
-                        icon: Icons.visibility,
-                        color: Colors.purple,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                ),
+                const SizedBox(height: 12),
+                _buildEventCard(
+                  title: 'Self-defense Workshop',
+                  date: 'May 15, 2023 • 2:00 PM',
+                  location: 'Community Center',
+                  participants: 24,
+                  image: 'assets/images/self_defense.jpg',
+                ),
+                const SizedBox(height: 12),
+                _buildEventCard(
+                  title: 'Neighborhood Watch Meeting',
+                  date: 'May 18, 2023 • 6:30 PM',
+                  location: 'Local Library',
+                  participants: 18,
+                  image: 'assets/images/neighborhood_watch.jpg',
+                ),
+                const SizedBox(height: 12),
+                _buildEventCard(
+                  title: 'Safety App Training',
+                  date: 'May 22, 2023 • 4:00 PM',
+                  location: 'Online Zoom Meeting',
+                  participants: 32,
+                  image: 'assets/images/app_training.jpg',
+                ),
+              ],
             ),
-            
-            const SizedBox(height: 20),
-            
-            // Upcoming Events
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Upcoming Events',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  _buildEventCard(
-                    title: 'Self-defense Workshop',
-                    date: 'May 15, 2023 • 2:00 PM',
-                    location: 'Community Center',
-                    participants: 24,
-                    image: 'assets/images/self_defense.jpg',
-                  ),
-                  const SizedBox(height: 12),
-                  _buildEventCard(
-                    title: 'Neighborhood Watch Meeting',
-                    date: 'May 18, 2023 • 6:30 PM',
-                    location: 'Local Library',
-                    participants: 18,
-                    image: 'assets/images/neighborhood_watch.jpg',
-                  ),
-                  const SizedBox(height: 12),
-                  _buildEventCard(
-                    title: 'Safety App Training',
-                    date: 'May 22, 2023 • 4:00 PM',
-                    location: 'Online Zoom Meeting',
-                    participants: 32,
-                    image: 'assets/images/app_training.jpg',
-                  ),
-                ],
-              ),
-            ),
-            
-            const SizedBox(height: 20),
-          ],
-        ),
+          ),
+          
+          const SizedBox(height: 20),
+        ],
       ),
     );
   }

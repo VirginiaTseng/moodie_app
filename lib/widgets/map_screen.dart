@@ -6,193 +6,174 @@ class MapScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Safety Map'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.dark_mode),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.mic),
-            onPressed: () {},
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          // Search bar
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(24),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    spreadRadius: 1,
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
+    return Column(
+      children: [
+        // Search bar
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 1,
+                  blurRadius: 4,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: 'Search location...',
+                prefixIcon: const Icon(Icons.search),
+                border: InputBorder.none,
+                contentPadding: const EdgeInsets.symmetric(vertical: 15),
+                suffixIcon: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      height: 24,
+                      width: 1,
+                      color: Colors.grey.shade300,
+                      margin: const EdgeInsets.symmetric(vertical: 8),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.mic),
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
               ),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Search location...',
-                  prefixIcon: const Icon(Icons.search),
-                  border: InputBorder.none,
-                  contentPadding: const EdgeInsets.symmetric(vertical: 15),
-                  suffixIcon: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        height: 24,
-                        width: 1,
-                        color: Colors.grey.shade300,
-                        margin: const EdgeInsets.symmetric(vertical: 8),
+            ),
+          ),
+        ),
+        
+        // Filter buttons
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Row(
+            children: [
+              _buildFilterChip(
+                label: 'Safe Routes',
+                icon: Icons.shield,
+                color: AppTheme.primaryColor,
+                isSelected: true,
+              ),
+              const SizedBox(width: 8),
+              _buildFilterChip(
+                label: 'Risk Areas',
+                icon: Icons.warning,
+                color: Colors.red,
+                isSelected: false,
+              ),
+              const SizedBox(width: 8),
+              _buildFilterChip(
+                label: 'Help Points',
+                icon: Icons.local_hospital,
+                color: Colors.green,
+                isSelected: false,
+              ),
+            ],
+          ),
+        ),
+        
+        // Map placeholder
+        Expanded(
+          child: Stack(
+            children: [
+              Container(
+                color: Colors.grey.shade200,
+                child: const Center(
+                  child: Text('Map will be displayed here'),
+                ),
+              ),
+              
+              // Route planning panel
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.3),
+                        spreadRadius: 1,
+                        blurRadius: 10,
+                        offset: const Offset(0, -2),
                       ),
-                      IconButton(
-                        icon: const Icon(Icons.mic),
-                        onPressed: () {},
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Route Planning',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      _buildLocationInput(
+                        label: 'Start Point',
+                        value: 'Current Location',
+                        icon: Icons.my_location,
+                      ),
+                      const SizedBox(height: 12),
+                      _buildLocationInput(
+                        label: 'Destination',
+                        value: 'Select destination',
+                        icon: Icons.location_on,
+                      ),
+                      const SizedBox(height: 16),
+                      const Text(
+                        'Suggested Routes',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      _buildRouteOption(
+                        title: 'Safest Route',
+                        time: '25 minutes',
+                        icon: Icons.shield,
+                        color: AppTheme.primaryColor,
+                        isSelected: true,
+                      ),
+                      const SizedBox(height: 8),
+                      _buildRouteOption(
+                        title: 'Fastest Route',
+                        time: '18 minutes',
+                        icon: Icons.speed,
+                        color: Colors.orange,
+                        isSelected: false,
+                      ),
+                      const SizedBox(height: 8),
+                      _buildRouteOption(
+                        title: 'Alternative Route',
+                        time: '22 minutes',
+                        icon: Icons.alt_route,
+                        color: Colors.purple,
+                        isSelected: false,
                       ),
                     ],
                   ),
                 ),
               ),
-            ),
+            ],
           ),
-          
-          // Filter buttons
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              children: [
-                _buildFilterChip(
-                  label: 'Safe Routes',
-                  icon: Icons.shield,
-                  color: AppTheme.primaryColor,
-                  isSelected: true,
-                ),
-                const SizedBox(width: 8),
-                _buildFilterChip(
-                  label: 'Risk Areas',
-                  icon: Icons.warning,
-                  color: Colors.red,
-                  isSelected: false,
-                ),
-                const SizedBox(width: 8),
-                _buildFilterChip(
-                  label: 'Help Points',
-                  icon: Icons.local_hospital,
-                  color: Colors.green,
-                  isSelected: false,
-                ),
-              ],
-            ),
-          ),
-          
-          // Map placeholder
-          Expanded(
-            child: Stack(
-              children: [
-                Container(
-                  color: Colors.grey.shade200,
-                  child: const Center(
-                    child: Text('Map will be displayed here'),
-                  ),
-                ),
-                
-                // Route planning panel
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.3),
-                          spreadRadius: 1,
-                          blurRadius: 10,
-                          offset: const Offset(0, -2),
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Route Planning',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        _buildLocationInput(
-                          label: 'Start Point',
-                          value: 'Current Location',
-                          icon: Icons.my_location,
-                        ),
-                        const SizedBox(height: 12),
-                        _buildLocationInput(
-                          label: 'Destination',
-                          value: 'Select destination',
-                          icon: Icons.location_on,
-                        ),
-                        const SizedBox(height: 16),
-                        const Text(
-                          'Suggested Routes',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        _buildRouteOption(
-                          title: 'Safest Route',
-                          time: '25 minutes',
-                          icon: Icons.shield,
-                          color: AppTheme.primaryColor,
-                          isSelected: true,
-                        ),
-                        const SizedBox(height: 8),
-                        _buildRouteOption(
-                          title: 'Fastest Route',
-                          time: '18 minutes',
-                          icon: Icons.speed,
-                          color: Colors.orange,
-                          isSelected: false,
-                        ),
-                        const SizedBox(height: 8),
-                        _buildRouteOption(
-                          title: 'Alternative Route',
-                          time: '22 minutes',
-                          icon: Icons.alt_route,
-                          color: Colors.purple,
-                          isSelected: false,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

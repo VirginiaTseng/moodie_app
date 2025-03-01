@@ -6,206 +6,187 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.dark_mode),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.mic),
-            onPressed: () {},
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // Profile header
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 24),
-              color: AppTheme.primaryColor,
-              child: Center(
-                child: Column(
-                  children: [
-                    const CircleAvatar(
-                      radius: 50,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          // Profile header
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 24),
+            color: AppTheme.primaryColor,
+            child: Center(
+              child: Column(
+                children: [
+                  const CircleAvatar(
+                    radius: 50,
+                    backgroundColor: Colors.white,
+                    child: Icon(
+                      Icons.person,
+                      size: 60,
+                      color: AppTheme.primaryColor,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  const Text(
+                    'Username',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'User ID: 12345678',
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.8),
+                      fontSize: 14,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
-                      child: Icon(
-                        Icons.person,
-                        size: 60,
-                        color: AppTheme.primaryColor,
+                      foregroundColor: AppTheme.primaryColor,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
                       ),
                     ),
-                    const SizedBox(height: 16),
-                    const Text(
-                      'Username',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: const Text('Edit Profile'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          
+          // Safety statistics
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Safety Statistics',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _buildStatItem(
+                      value: '85%',
+                      label: 'Safety Score',
+                      icon: Icons.shield,
+                      color: Colors.blue,
                     ),
-                    const SizedBox(height: 4),
-                    Text(
-                      'User ID: 12345678',
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.8),
-                        fontSize: 14,
-                      ),
+                    _buildStatItem(
+                      value: '12',
+                      label: 'Safety Checks',
+                      icon: Icons.check_circle,
+                      color: Colors.green,
                     ),
-                    const SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        foregroundColor: AppTheme.primaryColor,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 24,
-                          vertical: 12,
-                        ),
-                      ),
-                      child: const Text('Edit Profile'),
+                    _buildStatItem(
+                      value: '30',
+                      label: 'Days Protected',
+                      icon: Icons.calendar_today,
+                      color: Colors.purple,
+                    ),
+                    _buildStatItem(
+                      value: '2',
+                      label: 'Alerts Sent',
+                      icon: Icons.warning,
+                      color: Colors.orange,
                     ),
                   ],
                 ),
-              ),
+              ],
             ),
-            
-            // Safety statistics
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Safety Statistics',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+          ),
+          
+          const Divider(),
+          
+          // Account settings
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Account Settings',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
                   ),
-                  const SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      _buildStatItem(
-                        value: '85%',
-                        label: 'Safety Score',
-                        icon: Icons.shield,
-                        color: Colors.blue,
-                      ),
-                      _buildStatItem(
-                        value: '12',
-                        label: 'Safety Checks',
-                        icon: Icons.check_circle,
-                        color: Colors.green,
-                      ),
-                      _buildStatItem(
-                        value: '30',
-                        label: 'Days Protected',
-                        icon: Icons.calendar_today,
-                        color: Colors.purple,
-                      ),
-                      _buildStatItem(
-                        value: '2',
-                        label: 'Alerts Sent',
-                        icon: Icons.warning,
-                        color: Colors.orange,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            
-            const Divider(),
-            
-            // Account settings
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Account Settings',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  _buildSettingsItem(
-                    icon: Icons.notifications,
-                    title: 'Notification Settings',
-                    subtitle: 'Manage your notifications',
-                    color: Colors.blue,
-                  ),
-                  _buildSettingsItem(
-                    icon: Icons.lock,
-                    title: 'Privacy Settings',
-                    subtitle: 'Control who can see your information',
-                    color: Colors.purple,
-                  ),
-                  _buildSettingsItem(
-                    icon: Icons.warning,
-                    title: 'Emergency Settings',
-                    subtitle: 'Configure emergency response',
-                    color: Colors.red,
-                  ),
-                ],
-              ),
-            ),
-            
-            const Divider(),
-            
-            // Support and about
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildSettingsItem(
-                    icon: Icons.help,
-                    title: 'Help & Support',
-                    subtitle: 'Get help with the app',
-                    color: Colors.green,
-                  ),
-                  _buildSettingsItem(
-                    icon: Icons.info,
-                    title: 'About',
-                    subtitle: 'App version and information',
-                    color: Colors.grey,
-                  ),
-                ],
-              ),
-            ),
-            
-            const SizedBox(height: 16),
-            
-            // Logout button
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red.shade50,
-                  foregroundColor: Colors.red,
-                  minimumSize: const Size(double.infinity, 50),
                 ),
-                child: const Text('Logout'),
-              ),
+                const SizedBox(height: 16),
+                _buildSettingsItem(
+                  icon: Icons.notifications,
+                  title: 'Notification Settings',
+                  subtitle: 'Manage your notifications',
+                  color: Colors.blue,
+                ),
+                _buildSettingsItem(
+                  icon: Icons.lock,
+                  title: 'Privacy Settings',
+                  subtitle: 'Control who can see your information',
+                  color: Colors.purple,
+                ),
+                _buildSettingsItem(
+                  icon: Icons.warning,
+                  title: 'Emergency Settings',
+                  subtitle: 'Configure emergency response',
+                  color: Colors.red,
+                ),
+              ],
             ),
-            
-            const SizedBox(height: 32),
-          ],
-        ),
+          ),
+          
+          const Divider(),
+          
+          // Support and about
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildSettingsItem(
+                  icon: Icons.help,
+                  title: 'Help & Support',
+                  subtitle: 'Get help with the app',
+                  color: Colors.green,
+                ),
+                _buildSettingsItem(
+                  icon: Icons.info,
+                  title: 'About',
+                  subtitle: 'App version and information',
+                  color: Colors.grey,
+                ),
+              ],
+            ),
+          ),
+          
+          const SizedBox(height: 16),
+          
+          // Logout button
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red.shade50,
+                foregroundColor: Colors.red,
+                minimumSize: const Size(double.infinity, 50),
+              ),
+              child: const Text('Logout'),
+            ),
+          ),
+          
+          const SizedBox(height: 32),
+        ],
       ),
     );
   }
